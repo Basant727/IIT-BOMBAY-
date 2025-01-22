@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIT Bombay Study Resources</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="#upload">Upload Resource</a></li>
+        </ul>
+    </nav>
+
+    <div id="home">
+        <h1>Welcome to IIT Bombay Study Resources</h1>
+        <p>Your one-stop destination for study materials.</p>
+    </div>
+
+    <div id="resources">
+        <h2>Available Resources</h2>
+        <div id="resourceList">
+            <!-- Resources will be dynamically added here -->
+        </div>
+    </div>
+
+    <div id="upload">
+        <h2>Upload a Resource</h2>
+        <form id="uploadForm">
+            <input type="file" name="resource" required>
+            <input type="text" name="description" placeholder="Resource Description" required>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+body {
+    background-image: url("https://images.pexels.com/photos/351961/pexels-photo-351961.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+    background-size: cover;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+#upload {
+    margin-top: 100px; /* To avoid overlap with the fixed nav */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type="file"], input[type="text"] {
+    margin: 10px;
+    padding: 10px;
+    width: 300px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+document.getElementById('uploadForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const resourceInput = event.target.resource.files[0];
+    const descriptionInput = event.target.description.value;
+
+    if (resourceInput && descriptionInput) {
+        const resourceList = document.getElementById('resourceList');
+        const resourceItem = document.createElement('div');
+        resourceItem.textContent = `${descriptionInput} (Uploaded: ${resourceInput.name})`;
+        resourceList.appendChild(resourceItem);
+
+        // Clear the form
+        event.target.reset();
+    } else {
+        alert('Please provide both a resource and a description.');
+    }
+});
+
